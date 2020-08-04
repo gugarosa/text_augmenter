@@ -1,0 +1,9 @@
+\beamer@slide {s.introduction}{4}
+\beamer@slide {s.nlp}{6}
+\beamer@slide {ss.gln}{7}
+\beamer@slide {s.rnn}{9}
+\beamer@slide {ss.lstm}{10}
+\beamer@slide {ss.gru}{11}
+\beamer@slide {s.transformer}{13}
+\beamer@slide {s.application}{15}
+\beamer@slide {s.conclusion}{17}

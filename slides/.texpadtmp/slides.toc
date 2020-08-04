@@ -1,0 +1,10 @@
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Introdu\IeC {\c c}\IeC {\~a}o}{3}{0}{1}
+\beamer@sectionintoc {2}{Processamento de Linguagem Natural}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Gera\IeC {\c c}\IeC {\~a}o de Linguagem Natural}{7}{0}{2}
+\beamer@sectionintoc {3}{Redes Neurais Recorrentes}{8}{0}{3}
+\beamer@subsectionintoc {3}{1}{Rede de Mem\IeC {\'o}ria de Longo Prazo}{10}{0}{3}
+\beamer@subsectionintoc {3}{2}{Unidade Recorrente de Porta}{11}{0}{3}
+\beamer@sectionintoc {4}{Transformadores}{12}{0}{4}
+\beamer@sectionintoc {5}{Aplica\IeC {\c c}\IeC {\~o}es}{14}{0}{5}
+\beamer@sectionintoc {6}{Conclus\IeC {\~a}o}{16}{0}{6}
