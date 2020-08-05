@@ -1,0 +1,2 @@
+git+https://github.com/gugarosa/nalp
+transformers>=3.0.2
