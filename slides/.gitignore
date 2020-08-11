@@ -1,0 +1,3 @@
+# Texpad unwanted files
+.texpadtmp/
+figs/*.pdf
