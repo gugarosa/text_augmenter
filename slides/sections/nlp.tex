@@ -69,9 +69,58 @@
 	\end{figure}
 \end{frame}
 
-\subsection{Geração de Linguagem Natural}
+\subsection{Modelagem de Linguagem}
 \label{ss.gln}
 
-\begin{frame}{Geração de Linguagem Natural}
-	Lorem ipsum ...
+\begin{frame}{Modelagem de Linguagem}
+	\begin{itemize}
+		\justifying
+		\item A tarefa de modelagem de linguagem refere-se à capacidade de modelos probabilísticos em \textbf{estimar} um $t+1$ estado dado $t$ estados anteriores;
+		\\~\\
+		\item O modelo linguístico aprende a \textbf{probabilidade de ocorrência} de \emph{tokens} baseado em exemplos;
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\justifying
+		\item O processo de treinamento é baseado em um \textbf{conjunto de exemplos}, não sendo prático para estimar dados não-existentes, por exemplo, \emph{tokens} não encontrados no conjunto de dados;
+		\\~\\
+		\item Modelos linguísticos são utilizados como \textbf{arquiteturas-base} em tarefas complexas;
+		\\~\\
+		\item Também podem ser utilizados para a \textbf{geração artificial de texto}.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Geração Artificial de Texto}
+	\begin{itemize}
+		\justifying
+		\item Um modelo linguístico \textbf{adequadamente treinado} é capaz de codificar características e regras do texto em que foi treinado;
+		\\~\\
+		\item Aprender a \textbf{distribuição probabilística} que representa o conjunto de dados utilizado.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\justifying
+		\item Distribuição probabilística de um \emph{token} no estado $t$, dado uma sequência prévia de $n$ \emph{tokens}:
+		\begin{equation}
+			P(w_t | w_{t-1}, w_{t-2}, \ldots, w_{t-n})	
+		\end{equation}
+		\\~\\
+		\item Objetivo é estimar as probabilidades de um \emph{token} $w_{t+1}$ dado uma sequência prévia de $n+1$ \emph{tokens}:
+		\begin{equation}
+			P(w_{t+1} | w_{t}, w_{t-1}, \ldots, w_{t-n+1})	
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[scale=0.425]{figs/text_generation.eps}	
+		\label{f.text_generation}
+		\caption{Exemplo de um processo de geração artificial de texto.}
+	\end{figure}
 \end{frame}
