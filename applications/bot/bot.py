@@ -44,7 +44,7 @@ def generate(update, context):
     update.message.reply_html(f'<b>{input_text}</b>')
 
     # Sends back the generated text
-    update.message.reply_html(f'Caso queira gerar outro texto, por favor inicie novamente através de <b>/start</b>.')
+    update.message.reply_html(f'Caso queira gerar outro texto, por favor fale novamente comigo.')
 
     return ConversationHandler.END
 
@@ -70,9 +70,10 @@ def init(key):
         ConversationHandler(
             entry_points=[
                 CommandHandler('start', start),
+                MessageHandler(Filters.regex('^(?i)(Ei|Olá|Ola|Oi|Bot)'), start)
             ],
             states={
-                'GENERATE': [MessageHandler(Filters.text, generate, pass_user_data=True)]
+                'GENERATE': [MessageHandler(Filters.text, generate)]
             },
             fallbacks=[
             ]
