@@ -1,6 +1,7 @@
-from transformers import AutoModelWithLMHead, AutoTokenizer, top_k_top_p_filtering
 import torch
 from torch.nn import functional as F
+from transformers import (AutoModelWithLMHead, AutoTokenizer,
+                          top_k_top_p_filtering)
 
 tokenizer = AutoTokenizer.from_pretrained("gpt2")
 model = AutoModelWithLMHead.from_pretrained("gpt2")

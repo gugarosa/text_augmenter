@@ -1,5 +1,5 @@
-from transformers import AutoModelWithLMHead, AutoTokenizer
 import torch
+from transformers import AutoModelWithLMHead, AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-cased")
 model = AutoModelWithLMHead.from_pretrained("distilbert-base-cased")
