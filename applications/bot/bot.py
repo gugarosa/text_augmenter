@@ -1,7 +1,49 @@
 import configparser
 
+import json
+
+import requests
+
 from telegram.ext import (CommandHandler, ConversationHandler, Filters,
                           MessageHandler, Updater)
+
+
+def generate_text(seed):
+    """Performs a call to Google's API to perform speech-to-text.
+
+    Args:
+        audio_path (str): Path to audio that needs to be transcripted.
+
+    Returns:
+        An already decoded JSON object holding the desired innformation.
+
+    """
+
+    # Data structure
+    data = {
+        'seed': seed
+    }
+
+    # Dumping the data into a JSON object
+    payload = json.dumps(data)
+
+    # Tries to perform the API call
+    try:
+        # POST request over the part-of-speech API method
+        r = requests.post('http://localhost:8080', data=payload)
+
+        # Decoding response
+        response = json.loads(r.text)
+
+        # Accessing JSON object and gathering request's response
+        result = response['result']
+
+        return result
+
+    # If by any chance it fails
+    except:
+        # Return the response as none
+        return None
 
 
 def start(update, context):
@@ -19,7 +61,7 @@ def start(update, context):
     print(f'New interaction from: {first_name}')
 
     # Sends back a reply
-    update.message.reply_text(f'Olá, {first_name}! Por favor, me envie um texto inicial.')
+    update.message.reply_text(f'Hello, {first_name}! Please, send me a seed text.')
 
     print(f'Awaiting response ...')
 
@@ -40,11 +82,16 @@ def generate(update, context):
 
     print(f'Generating text from: {input_text}')
 
-    # Sends back the generated text
-    update.message.reply_html(f'<b>{input_text}</b>')
+    update.message.reply_text('Please wait while I am generating the text ...')
+
+    # Makes an API call to generate text
+    text = generate_text(input_text + " ")
 
     # Sends back the generated text
-    update.message.reply_html(f'Caso queira gerar outro texto, por favor fale novamente comigo.')
+    update.message.reply_text(text)
+
+    # Sends back the generated text
+    update.message.reply_html(f'If you wish to generate more text, please call me again.')
 
     return ConversationHandler.END
 
@@ -70,7 +117,7 @@ def init(key):
         ConversationHandler(
             entry_points=[
                 CommandHandler('start', start),
-                MessageHandler(Filters.regex('^(?i)(Ei|Olá|Ola|Oi|Bot)'), start)
+                MessageHandler(Filters.regex('^(?i)(Hey|Hello|Hi|Hallo|Bot)'), start)
             ],
             states={
                 'GENERATE': [MessageHandler(Filters.text, generate)]

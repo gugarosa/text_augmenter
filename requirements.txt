@@ -1,5 +1,5 @@
 git+https://github.com/gugarosa/nalp
 python-telegram-bot>=12.8
 requests>=2.21.0
+textfier>=1.0.0
 tornado>=6.0.4
-transformers>=3.0.2
