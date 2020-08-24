@@ -41,6 +41,3 @@ The bot code is available at the `applications/bot` folder and is composed of tw
 ## Support
 
 It is inevitable to make mistakes or create some bugs. If there is any problem or concern, we will be available at this repository or gustavo.rosa@unesp.br.
-
-# text-augmenter
-✒️ RNNs and Transformers text-based augmentation for ICMC/USP mini-course.
