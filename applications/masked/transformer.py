@@ -1,18 +1,26 @@
 import torch
-from transformers import AutoModelWithLMHead, AutoTokenizer
 
-tokenizer = AutoTokenizer.from_pretrained("distilbert-base-cased")
-model = AutoModelWithLMHead.from_pretrained("distilbert-base-cased")
+from textfier.tasks import MaskedLanguageModelingTask
 
-sequence = f"Distilled models are smaller than the models they mimic. Using them instead of the large versions would help {tokenizer.mask_token} our carbon footprint."
+# Creates a masked language modeling task
+task = MaskedLanguageModelingTask(model='distilbert-base-cased')
 
-input = tokenizer.encode(sequence, return_tensors="pt")
-mask_token_index = torch.where(input == tokenizer.mask_token_id)[1]
+# Defines the input text
+text = f'Do you want to {task.tokenizer.mask_token} tomorrow?'
 
-token_logits = model(input)[0]
-mask_token_logits = token_logits[0, mask_token_index, :]
+# Encodes the input
+enc_text = task.tokenizer.encode(text, return_tensors='pt')
 
-top_5_tokens = torch.topk(mask_token_logits, 5, dim=1).indices[0].tolist()
+# Gathers the mask token's index
+mask_token = torch.where(enc_text == task.tokenizer.mask_token_id)[1]
 
-for token in top_5_tokens:
-    print(sequence.replace(tokenizer.mask_token, tokenizer.decode([token])))
+# Performs the generation and gathers the masked token predictions
+preds = task.model(enc_text)[0]
+mask_preds = preds[0, mask_token, :]
+
+# Gathers the top-5 mask predictions
+top_masks = torch.topk(mask_preds, 5, dim=1).indices[0].tolist()
+
+# Iterates over all top-5 mask predictions
+for mask in top_masks:
+    print(text.replace(task.tokenizer.mask_token, task.tokenizer.decode([mask])))

@@ -1,27 +1,27 @@
 import torch
 from torch.nn import functional as F
-from transformers import (AutoModelWithLMHead, AutoTokenizer,
-                          top_k_top_p_filtering)
+from textfier.tasks import CausalLanguageModelingTask
+from transformers import top_k_top_p_filtering
 
-tokenizer = AutoTokenizer.from_pretrained("gpt2")
-model = AutoModelWithLMHead.from_pretrained("gpt2")
+# Creates a causal language modeling task
+task = CausalLanguageModelingTask(model='gpt2')
 
-sequence = f"Hugging Face is based in DUMBO, New York City, and "
+# Defines the input seed
+seed = 'I would like to go to the zoo and '
 
-input_ids = tokenizer.encode(sequence, return_tensors="pt")
+# Encodes the input
+inputs = task.tokenizer.encode(seed, return_tensors='pt')
 
-# get logits of last hidden state
-next_token_logits = model(input_ids)[0][:, -1, :]
+# Passes the inputs through the model and gathers the logits
+logits = task.model(inputs)[0][:, -1, :]
 
-# filter
-filtered_next_token_logits = top_k_top_p_filtering(next_token_logits, top_k=50, top_p=1.0)
+# Filters the logits
+filtered_logits = top_k_top_p_filtering(logits, top_k=50, top_p=1.0)
 
-# sample
-probs = F.softmax(filtered_next_token_logits, dim=-1)
-next_token = torch.multinomial(probs, num_samples=1)
+# Gathers the softmax distribution and samples the logits
+probs = F.softmax(filtered_logits, dim=-1)
+token = torch.multinomial(probs, num_samples=1)
 
-generated = torch.cat([input_ids, next_token], dim=-1)
-
-resulting_string = tokenizer.decode(generated.tolist()[0])
-
-print(resulting_string)
+# Concatenates the generated token with the input seed and decodes into text
+generated = task.tokenizer.decode(torch.cat([inputs, token], dim=-1).tolist()[0])
+print(generated)

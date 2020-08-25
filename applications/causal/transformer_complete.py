@@ -1,10 +1,11 @@
-from transformers import AutoModelWithLMHead, AutoTokenizer
+from textfier.tasks import CausalLanguageModelingTask
 
-model = AutoModelWithLMHead.from_pretrained("xlnet-base-cased")
-tokenizer = AutoTokenizer.from_pretrained("xlnet-base-cased")
+# Creates a causal language modeling task
+task = CausalLanguageModelingTask(model='xlnet-base-cased')
 
-# Padding text helps XLNet with short prompts - proposed by Aman Rusia in https://github.com/rusiaaman/XLNet-gen#methodology
-PADDING_TEXT = """In 1991, the remains of Russian Tsar Nicholas II and his family
+# Usage of padding text helps XLNet with short seeds
+# Proposed by Aman Rusia in https://github.com/rusiaaman/XLNet-gen#methodology
+PADDING = '''In 1991, the remains of Russian Tsar Nicholas II and his family
 (except for Alexei and Maria) are discovered.
 The voice of Nicholas's young son, Tsarevich Alexei Nikolaevich, narrates the
 remainder of the story. 1883 Western Siberia,
@@ -13,13 +14,20 @@ Rasputin has a vision and denounces one of the men as a horse thief. Although hi
 father initially slaps him for making such an accusation, Rasputin watches as the
 man is chased outside and beaten. Twenty years later, Rasputin sees a vision of
 the Virgin Mary, prompting him to become a priest. Rasputin quickly becomes famous,
-with people, even a bishop, begging for his blessing. <eod> </s> <eos>"""
+with people, even a bishop, begging for his blessing. <eod> </s> <eos>'''
 
-prompt = "Today the weather is really nice and I am planning on "
-inputs = tokenizer.encode(PADDING_TEXT + prompt, add_special_tokens=False, return_tensors="pt")
+# Defines the input seed
+seed = 'I would like to go to the zoo and '
 
-prompt_length = len(tokenizer.decode(inputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True))
-outputs = model.generate(inputs, max_length=250, do_sample=True, top_p=0.95, top_k=60)
-generated = prompt + tokenizer.decode(outputs[0])[prompt_length:]
+# Encodes the input
+inputs = task.tokenizer.encode(PADDING + seed, add_special_tokens=False, return_tensors='pt')
 
+# Gathers the length of padded input
+length = len(task.tokenizer.decode(inputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True))
+
+# Performs the generation
+outputs = task.model.generate(inputs, max_length=250, do_sample=True, top_p=0.95, top_k=60)
+
+# Decodes the generation outputs
+generated = seed + task.tokenizer.decode(outputs[0])[length:]
 print(generated)
