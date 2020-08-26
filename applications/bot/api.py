@@ -16,7 +16,7 @@ Rasputin has a vision and denounces one of the men as a horse thief. Although hi
 father initially slaps him for making such an accusation, Rasputin watches as the
 man is chased outside and beaten. Twenty years later, Rasputin sees a vision of
 the Virgin Mary, prompting him to become a priest. Rasputin quickly becomes famous,
-with people, even a bishop, begging for his blessing. <eod> </s> <eos>'''
+with people, even a bishop, begging for his blessing.'''
 
 
 class GeneratorHandler(RequestHandler):

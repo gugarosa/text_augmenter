@@ -85,7 +85,7 @@ def generate(update, context):
     update.message.reply_text('Please wait while I am generating the text ...')
 
     # Makes an API call to generate text
-    text = generate_text(input_text + " ")
+    text = generate_text(input_text)
 
     # Sends back the generated text
     update.message.reply_text(text)

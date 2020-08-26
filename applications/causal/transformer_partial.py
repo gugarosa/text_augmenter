@@ -7,7 +7,7 @@ from transformers import top_k_top_p_filtering
 task = CausalLanguageModelingTask(model='gpt2')
 
 # Defines the input seed
-seed = 'I would like to go to the zoo and '
+seed = 'I would like to go to the zoo and'
 
 # Encodes the input
 inputs = task.tokenizer.encode(seed, return_tensors='pt')
