@@ -2,11 +2,15 @@
 
 Text Augmenter provides a thorough lecture on text-based augmentation techniques to be given at ICMC/USP mini-course. Apart from the lecture itself, we also implemented a wide variety of tasks to illustrate how one can use such tools in real-world applications.
 
+---
+
 ## Guidelines
 
 1. Every needed piece of information is elucidated in this **README**;
 2. **Installation** is also straightforward and well-explained;
 3. If there is a problem, please do not **hesitate** and call us.
+
+---
 
 ## Installation
 
@@ -17,6 +21,8 @@ pip install -r requirements.txt
 ```
 
 Additionally, the source files for the lecture are presented in LaTeX. Thus, one might need an additional compiler or even Overleaf to build the files into a PDF file.
+
+---
 
 ## Getting Started
 
@@ -38,6 +44,10 @@ Masked language generation is the task of predicting a masked token given a sequ
 
 The bot code is available at the `applications/bot` folder and is composed of two scripts: `bot.py` and `api.py`. The `bot.py` stands for a straightforward implementation using the python-telegram-bot and provides a simple user interaction, while the `api.py` implements a one-handler API using tornado, which encodes the text generation task.
 
+---
+
 ## Support
 
 It is inevitable to make mistakes or create some bugs. If there is any problem or concern, we will be available at this repository or gustavo.rosa@unesp.br.
+
+---
