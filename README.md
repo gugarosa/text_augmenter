@@ -1,6 +1,6 @@
 # Text Augmenter: A Lecture on Text-based Augmentation
 
-Text Augmenter provides a thorough lecture on text-based augmentation techniques to be given at ICMC/USP mini-course. Apart from the lecture itself, we also implemented a wide variety of tasks to illustrate how one can use such tools in real-world applications.
+Text Augmenter provides a thorough lecture on text-based augmentation techniques to be given at "4ª Escola Avançada em Big Data Analytics - ICMC/USP". Apart from the lecture itself, we also implemented a wide variety of tasks to illustrate how one can use such tools in real-world applications.
 
 ---
 
